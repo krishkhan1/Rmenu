@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Right-Click Menu with Submenus</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.menu {
+			display: none;
+			position: absolute;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			box-shadow: 2px 2px 2px #ccc;
+			padding: 5px 0;
+			z-index: 1;
+		}
+
+		.menu li {
+			list-style: none;
+			padding: 5px 20px;
+			cursor: pointer;
+			position: relative;
+		}
+
+		.menu ul {
+			position: absolute;
+			top: 0;
+			left: 100%;
+			display: none;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			box-shadow: 2px 2px 2px #ccc;
+			z-index: 2;
+		}
+
+		.menu ul li {
+			list-style: none;
+			padding: 5px 20px;
+			cursor: pointer;
+		}
+
+		.menu li:hover {
+			background-color: #f2f2f2;
+		}
+
+		.menu ul li:hover {
+			background-color: #f2f2f2;
+		}
+	</style>
+</head>
+<body>
+	<h1>Right-Click Me</h1>
+
+	<ul class="menu">
+		<li>Menu Item 1
+			<ul>
+				<li>Submenu Item 1</li>
+				<li>Submenu Item 2</li>
+			</ul>
+		</li>
+		<li>Menu Item 2
+			<ul>
+				<li>Submenu Item 1</li>
+				<li>Submenu Item 2</li>
+			</ul>
+		</li>
+		<li>Menu Item 3</li>
+	</ul>
+
+	<script>
+		document.addEventListener('contextmenu', function(event) {
+			event.preventDefault();
+
+			var menu = document.querySelector('.menu');
+			menu.style.top = event.pageY + 'px';
+			menu.style.left = event.pageX + 'px';
+			menu.style.display = 'block';
+
+			document.addEventListener('click', function(event) {
+				if (!menu.contains(event.target)) {
+					menu.style.display = 'none';
+				}
+			});
+		});
+	</script>
+</body>
+</html>
